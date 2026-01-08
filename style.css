@@ -71,29 +71,50 @@ body {
 /* =========================
    Header / Hero
 ========================= */
-.header {
-    min-height: 100vh;
+/* Make header fill the viewport */
+header.header {
+    min-height: 100vh; /* full screen height */
     display: flex;
-    align-items: center;
+    align-items: center; /* vertically center content */
+    justify-content: center; /* center horizontally in container */
     padding: 0;
 }
 
-
+/* Make header content responsive */
 .header-content {
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 3rem;
-    text-align: left;
+    justify-content: flex-start; /* left-align content */
+    gap: 4rem;
     width: 100%;
+    max-width: 1200px;
 }
 
+/* Profile image sizing */
+.profile-card {
+    flex-shrink: 0;
+}
+
+/* Text section */
 .header-text {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    gap: 0.75rem;
+    gap: 1rem;
 }
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .header-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 2rem;
+    }
+
+    .header-text {
+        align-items: center;
+    }
+}
+
 
 .name { 
     font-size: clamp(2.8rem, 6vw, 4.5rem);
@@ -179,13 +200,15 @@ h2 {
 
 .project-card {
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    flex-direction: row;
+    justify-content: flex-start;
     background: var(--card-bg);
     border-radius: 24px;
     border: 1px solid var(--border);
-    padding: 2rem;
+    padding: 1.5rem;
     transition: 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    gap: 2rem;
+    flex-wrap: wrap; /* allows wrapping if needed */
 }
 
 .project-card:hover {
@@ -193,6 +216,47 @@ h2 {
     transform: translateY(-10px);
     background: rgba(255,255,255,0.05);
 }
+
+.project-image {
+    flex: 0 0 250px; /* do not shrink, fixed max width */
+    max-width: 250px; /* maximum width for the image */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.project-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 16px;
+    object-fit: cover;
+}
+
+.card-content {
+    flex: 1; /* content takes remaining space */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-width: 200px; /* prevent content from collapsing */
+}
+
+/* Responsive: stack image above text on small screens */
+@media (max-width: 1024px) {
+    .project-card {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .project-image {
+        max-width: 100%;
+        flex: unset;
+    }
+
+    .card-content {
+        min-width: unset;
+    }
+}
+
 
 .project-link {
     color: var(--primary);
@@ -486,4 +550,5 @@ footer {
         gap: 0.15rem;
     }
 }
+
 
