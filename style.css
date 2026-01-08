@@ -356,12 +356,13 @@ h2 {
    Footer
 ========================= */
 footer {
-    padding: 6rem 0 3rem;
+    padding: 8rem 0 4rem; 
     text-align: center;
     color: var(--text-muted);
-    font-size: 0.85rem;
+    font-size: clamp(0.75rem, 0.85vw, 0.85rem);
     border-top: 1px solid var(--border);
 }
+
 
 /* =========================
    Responsive
@@ -416,3 +417,73 @@ p, li {
 footer {
     font-size: clamp(0.75rem, 0.85vw, 0.85rem);
 }
+
+/* =========================
+   Achievements Section
+========================= */
+.achievements {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.achievement-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.achievement-heading {
+    font-size: clamp(1rem, 1.2vw, 1.1rem);
+    font-weight: 600;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.achievement-heading i {
+    color: var(--primary);
+}
+
+.achievement-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.achievement-list li {
+    display: flex;
+    flex-direction: column; /* forces meta below title */
+    font-size: clamp(0.95rem, 1.05vw, 1.05rem);
+}
+
+.achievement-title {
+    font-weight: 600;
+}
+
+.achievement-meta {
+    font-size: 0.85em;
+    color: var(--text-muted);
+    margin-top: 0.2rem;
+}
+
+/* Optional: make mobile slightly more compact */
+@media (max-width: 768px) {
+    .achievement-meta {
+        font-size: 0.8em;
+    }
+}
+
+
+/* Mobile stacking */
+@media (max-width: 480px) {
+    .achievement-list li {
+        flex-direction: column;
+        gap: 0.15rem;
+    }
+}
+
