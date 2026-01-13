@@ -8,6 +8,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
+
+
+
+
 <body>
 
 <div id="content">
@@ -71,7 +75,7 @@
             <a href="https://apps.apple.com/sg/app/labx/id6749056493" class="project-link">App Store <i class="fas fa-external-link-alt"></i></a>
         </div>
 
-        <div class="project-card">
+        <div class="project-card" >
             <div class="project-image">
                 <img src="Images/hmgis.jpg" alt="Voice Automated Car Screenshot">
             </div>
@@ -82,7 +86,7 @@
             </div>
         </div>
 
-        <div class="project-card">
+        <div class="project-card" data-pdf="Posters/sistemic.png">
             <div class="project-image">
                 <img src="Images/piezo.jpg" alt="Piezoelectric Energy Regeneration Screenshot">
             </div>
@@ -93,7 +97,7 @@
             </div>
         </div>
 
-        <div class="project-card">
+        <div class="project-card" data-pdf="Posters/americium.png">
             <div class="project-image">
                 <img src="Images/radiation.jpg" alt="Radiation Shielding Screenshot">
             </div>
@@ -251,8 +255,65 @@
     </footer>
 </div>
 
+<div id="pdfModal" class="pdf-modal">
+    <div class="pdf-backdrop"></div>
+
+    <div class="pdf-container">
+        <button class="pdf-close">&times;</button>
+
+        <!-- PDF -->
+        <iframe id="pdfFrame" class="viewer" frameborder="0"></iframe>
+
+        <!-- Image -->
+        <img id="imgFrame" class="viewer" />
+    </div>
+</div>
+
+
 <script>
     content.style.opacity = '1';
 </script>
+
+
+<script>
+const modal = document.getElementById('pdfModal');
+const pdfFrame = document.getElementById('pdfFrame');
+const imgFrame = document.getElementById('imgFrame');
+const closeBtn = document.querySelector('.pdf-close');
+const backdrop = document.querySelector('.pdf-backdrop');
+
+document.querySelectorAll('.project-card[data-pdf]').forEach(card => {
+    card.style.cursor = 'pointer';
+
+    card.addEventListener('click', () => {
+        const file = card.dataset.pdf.toLowerCase();
+
+        pdfFrame.style.display = 'none';
+        imgFrame.style.display = 'none';
+
+        if (file.endsWith('.pdf')) {
+            pdfFrame.src = file + '#view=FitH';
+            pdfFrame.style.display = 'block';
+        } else {
+            imgFrame.src = file;
+            imgFrame.style.display = 'block';
+        }
+
+        modal.classList.add('active');
+    });
+});
+
+function closeModal() {
+    pdfFrame.src = '';
+    imgFrame.src = '';
+    modal.classList.remove('active');
+}
+
+closeBtn.addEventListener('click', closeModal);
+backdrop.addEventListener('click', closeModal);
+</script>
+
+
+
 </body>
 </html>
