@@ -255,19 +255,25 @@
     </footer>
 </div>
 
+<!-- PDF / Image Modal -->
 <div id="pdfModal" class="pdf-modal">
     <div class="pdf-backdrop"></div>
 
     <div class="pdf-container">
-        <button class="pdf-close">&times;</button>
+        <!-- Top Bar -->
+        <div class="pdf-bar">
+            <span class="pdf-title">Certificate</span>
+            <button class="pdf-close">&times;</button>
+        </div>
 
-        <!-- PDF -->
-        <iframe id="pdfFrame" class="viewer" frameborder="0"></iframe>
-
-        <!-- Image -->
-        <img id="imgFrame" class="viewer" />
+        <!-- Viewer Area -->
+        <div class="pdf-viewer">
+            <iframe id="pdfFrame" class="viewer" frameborder="0"></iframe>
+            <img id="imgFrame" class="viewer" />
+        </div>
     </div>
 </div>
+
 
 
 <script>
@@ -287,6 +293,8 @@ document.querySelectorAll('.project-card[data-pdf]').forEach(card => {
 
     card.addEventListener('click', () => {
         const file = card.dataset.pdf.toLowerCase();
+        document.querySelector('.pdf-title').textContent =
+            card.querySelector('h3')?.textContent || 'Certificate';
 
         pdfFrame.style.display = 'none';
         imgFrame.style.display = 'none';
@@ -302,6 +310,7 @@ document.querySelectorAll('.project-card[data-pdf]').forEach(card => {
         modal.classList.add('active');
     });
 });
+
 
 function closeModal() {
     pdfFrame.src = '';
